@@ -1,0 +1,64 @@
+<div id="app">
+  <h1>{{ msg }}</h1>
+
+  <input type="text" v-model="searchText">
+
+  <ul>
+    <li v-for="item in arrNames"> {{ item | capitalize }} </li>
+  </ul>
+
+  <ul>
+    <li v-for="user in filterBy(users, searchText)"> {{ user.name }} </li>
+  </ul>
+
+  <hr>
+  <input type="text" v-model="emojiStr">
+  <p v-html="filtered"> </p>
+</div>
+
+<script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
+
+<script>
+  Vue.filter('emoji', function (value) {
+    return value.replace('единорог', '&#129412;')
+      .replace('щенок', '&#128054;')
+      .replace('огне', '&#128293;')
+      .replace('грустно', '&#128546;')
+  })
+
+  new Vue({
+    el: '#app',
+    mixins: [Vue2Filters.mixin],
+    data: {
+      msg: "Filter",
+      searchText: "",
+      arrNames: [
+        "Olya", "sergey"
+      ],
+      users: [
+        {
+          name: "Olya",
+          age: 24
+        },
+        {
+          name: "Sergey",
+          age: 28
+        }
+      ],
+      emojiStr: ""
+    },
+    filters: {
+      capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    },
+    computed: {
+      filtered() {
+        return this.$options.filters.emoji(this.emojiStr)
+      }
+    }
+  })
+</script>
