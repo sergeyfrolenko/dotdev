@@ -1,0 +1,24 @@
+<style>
+  .red {
+    color: red;
+  }
+</style>
+
+<div id="app">
+  <p>{{ msg }}</p>
+  <input type="text" v-model="msg"> <!-- // связывание данных -->
+
+  <p v-bind:class="testClass">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, recusandae ab accusamus natus dolorum praesentium, at ratione id impedit unde accusantium error hic sunt tenetur perspiciatis quos repellat magnam! Molestiae!</p> <!-- // связывание аттрибутов -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      msg: "Hello World",
+      testClass: "red"
+    }
+  })
+</script>

@@ -1,0 +1,43 @@
+<style>
+  .strike {
+    text-decoration: line-through dashed red;
+  }
+</style>
+
+<div id="app">
+  <h1>{{ msg }}</h1>
+
+  <ul>
+    <li v-for="item in arr"> {{ item }} </li>
+  </ul>
+
+  <ul>
+    <li v-for="item in arrObj" v-bind:class="{'strike': item.status}"> {{ item.name }} </li>
+  </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      msg: "List",
+      arr: ["one", "two", "three"],
+      arrObj: [
+        {
+          name: "one",
+          status: false
+        },
+        {
+          name: "two",
+          status: true
+        },
+        {
+          name: "three",
+          status: false
+        }
+      ]
+    }
+  })
+</script>

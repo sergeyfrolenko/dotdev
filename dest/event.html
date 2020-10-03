@@ -1,0 +1,35 @@
+<div id="app">
+  <h1>{{ msg }}</h1>
+  <button v-on:click="onClick">Press</button>
+
+  <form action="">
+    <button v-on:click.prevent="onClick2">Press form</button>
+  </form>
+
+  <input type="text" @keyup.13="inputMsg" v-model="inMsg">
+  <p> {{inMsg}} </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      msg: "Events",
+      inMsg: "sdf"
+    },
+    methods: {
+      onClick: () => {
+        console.log("message")
+      },
+      onClick2: (e) => {
+        // e.preventDefault();
+        console.log("message 2");
+      },
+      inputMsg: function () {
+        console.log(this.inMsg)
+      } // arrow function not bind environment
+    }
+  })
+</script>

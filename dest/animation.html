@@ -1,0 +1,105 @@
+<style>
+  .rect {
+    width: 100px;
+    height: 100px;
+    background: navy;
+  }
+
+  .fig {
+    width: 200px;
+    height: 200px;
+    border: 1px solid coral;
+  }
+
+  aside {
+    background: navy;
+    width: 100px;
+    height: 100px;
+  }
+
+  /* Анимация перехода */
+  .slide-enter-active {
+    transition: all 1.3s 1s;
+  }
+
+  .slide-enter {
+    transform: translateX(10px);
+    color: coral;
+  }
+
+
+  .slide-leave-active {
+    transition: all 2s 0.3s;
+    color: coral;
+    transform: translateX(10px);
+  }
+
+  /* animation from vue doc */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity .5s;
+  }
+
+  .fade-enter,
+  .fade-leave-to
+
+  /* .fade-leave-active до версии 2.1.8 */
+    {
+    opacity: 0;
+  }
+</style>
+
+<div id="app">
+  <h1>{{ msg }}</h1>
+
+  <!-- through style = display : none -->
+  <figure class="fig">
+    <button @click="isShow = !isShow">toggle style</button>
+    <div class="rect" v-show="isShow"></div>
+  </figure>
+
+
+  <!-- delete from DOM -->
+  <figure class="fig">
+    <button @click="isShow2 = !isShow2">toggle DOM</button>
+    <div class="rect" v-if="isShow2"></div>
+    <p v-else>empty</p>
+  </figure>
+
+  <!-- animation -->
+  <figure class="fig">
+    <button @click="isShow3 = !isShow3">toggle style width animation</button>
+    <transition name="slide">
+      <aside v-if="isShow3">gf</aside>
+    </transition>
+  </figure>
+
+  <!-- animation from vue doc -->
+  <button v-on:click="show = !show">
+    Переключить
+  </button>
+  <transition name="fade">
+    <p v-if="show">привет if</p>
+  </transition>
+
+  <transition name="fade">
+    <p v-show="show">привет show</p>
+  </transition>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      msg: "Animation",
+      isShow: false,
+      isShow2: false,
+      isShow3: true,
+      show: true
+    }
+  })
+</script>
