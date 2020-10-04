@@ -1,0 +1,175 @@
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  header {
+    position: fixed;
+    top: 50;
+    left: 0;
+    right: 0;
+    height: 48px;
+  }
+
+  nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  nav a {
+    display: inline-block;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: #8a8d96;
+    font-weight: 400;
+  }
+
+  nav a:hover {
+    color: #272727;
+  }
+
+  /* Фигуры */
+  .square,
+  .triangle,
+  .circle,
+  .egg {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+  }
+
+  .square {
+    width: 240px;
+    height: 240px;
+    background-color: #00bcd4;
+    margin-left: -120px;
+  }
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 120px 207.8px 120px;
+    border-color: transparent transparent #3f51b5 transparent;
+    margin-left: -120px;
+  }
+
+  .circle {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background-color: #cddc39;
+    margin-left: -120px;
+  }
+
+  .egg {
+    width: 168px;
+    height: 240px;
+    background-color: #ffc107;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    margin-left: -84px;
+  }
+
+  /* .switch-transition {
+    transition: all .5s ease-in-out;
+  }
+
+  .switch-enter {
+    left: 100%;
+  }
+
+  .switch-leave {
+    left: -100%;
+  } */
+  .switch-enter-active,
+  .switch-leave-active {
+    transition: all 1.5s ease-in-out;
+  }
+
+  .switch-enter {
+    left: 100%;
+  }
+
+  .switch-leave-to {
+    left: -100%;
+  }
+</style>
+
+<div id="title">
+  <h1>{{ title }}</h1>
+</div>
+
+<div id="app">
+  <header>
+    <nav>
+      <a href="#" @click="switchView('square')">Квадрат</a>
+      <a href="#" @click="switchView('triangle')">Треугольник</a>
+      <a href="#" @click="switchView('vCircle')">Круг</a>
+      <a href="#" @click="switchView('egg')">Яйцо</a>
+    </nav>
+  </header>
+  <transition name="switch">
+    <component v-bind:is="currentView"></component>
+  </transition>
+</div>
+
+<template id="square-template">
+  <div class="square"></div>
+</template>
+
+<template id="circle-template">
+  <div class="circle"></div>
+</template>
+
+<template id="triangle-template">
+  <div class="triangle"></div>
+</template>
+
+<template id="egg-template">
+  <div class="egg"></div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '#title',
+    data: {
+      title: "Dinamic component"
+    }
+  })
+
+  new Vue({
+    el: "#app",
+    data: {
+      currentView: 'square'
+    },
+    components: {
+      square: {
+        template: '#square-template'
+      },
+      triangle: {
+        template: '#triangle-template'
+      },
+      vCircle: {
+        template: '#circle-template'
+      },
+      egg: {
+        template: '#egg-template'
+      }
+    },
+    methods: {
+      switchView: function (view) {
+        this.currentView = view
+      }
+    }
+  })
+</script>

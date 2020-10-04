@@ -1,0 +1,47 @@
+<div id="app">
+  <h1>Emit</h1>
+
+  <ul>
+    <li v-for="msg in messages">
+      {{ msg }}
+    </li>
+  </ul>
+
+  <v-message @msg-saved="handleMsg"></v-message>
+</div>
+
+<template id="message-template">
+  <input v-model="message" @keyup.enter="saveMessage">
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  Vue.component('v-message', {
+    template: '#message-template',
+    data: function () {
+      return {
+        message: ""
+      }
+    },
+    methods: {
+      saveMessage: function () {
+        this.$emit('msg-saved', this.message)
+
+        this.message = ""
+      }
+    }
+  });
+
+  new Vue({
+    el: '#app',
+    data: {
+      messages: []
+    },
+    methods: {
+      handleMsg: function (message) {
+        this.messages.push(message)
+      }
+    }
+  });
+</script>

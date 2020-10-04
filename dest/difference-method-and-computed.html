@@ -1,0 +1,37 @@
+<div id="app">
+  <h1>difference-method-and-computed</h1>
+  <div>
+    <button @click="counterComputed++">computed button</button>
+    <p>{{ counterComputed }}</p> <br />
+    <button @click="counterMethod++">method button</button>
+    <p>{{ counterMethod }}</p> <br />
+    {{ printTextMethod() }}
+    {{ printTextComputed }}
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        counterComputed: 0,
+        counterMethod: 0
+      };
+    },
+    computed: {
+      printTextComputed: function () {
+        console.log("“counter printed from computed: ”",
+          this.counterComputed);
+      }
+    },
+    methods: {
+      printTextMethod: function () {
+        console.log("“counter printed from method: ”", this.counterMethod);
+      }
+    },
+  })
+</script>
